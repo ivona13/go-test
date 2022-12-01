@@ -10,5 +10,5 @@ jobs:
         with:
           fetch-depth: "0"
           token: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
-          ref: ${{ github.event.client_payload.ref }}
+          #ref: ${{ github.event.client_payload.ref }}
       - run: echo ${{ github.event.client_payload.sha }}
