@@ -1,3 +1,3 @@
-module github.com/go-proj
+module github.com/go-test
 
 go 1.18
