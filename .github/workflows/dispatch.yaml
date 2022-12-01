@@ -6,9 +6,18 @@ jobs:
   myEvent:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: "0"
           #token: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
           #ref: ${{ github.event.client_payload.ref }}
-      - run: echo ${{ github.event.client_payload.ref }}
+
+      - name: Get version from wrapper
+        run: echo ${{ github.event.client_payload.ref }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+          run: go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
