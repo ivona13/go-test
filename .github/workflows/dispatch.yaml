@@ -23,4 +23,5 @@ jobs:
 
       - name: Install package
         run: |
+          go env -w GOPRIVATE=“github.com/ivona13”
           go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
