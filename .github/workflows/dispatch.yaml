@@ -16,9 +16,11 @@ jobs:
       - name: Get version from wrapper
         run: echo ${{ github.event.client_payload.ref }}
 
-      - name: Set up Go and install package
+      - name: Set up Go
         uses: actions/setup-go@v3
         with:
           go-version: 1.19
-          run: |
-            go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
+
+      - name: Install package
+        run: |
+          go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
