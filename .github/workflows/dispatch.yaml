@@ -28,5 +28,6 @@ jobs:
 
       - name: Install package
         run: |
-          go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
+          go mod edit -replace github.com/ivona13/go-proj@*=github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
+          #go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
           go mod tidy
