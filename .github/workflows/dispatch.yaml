@@ -16,7 +16,7 @@ jobs:
           #token: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
           #ref: ${{ github.event.client_payload.ref }}
 
-      - name: Get version from wrapper
+      - name: Get version of go-proj
         run: echo ${{ github.event.client_payload.ref }}
 
       - name: Set up Go
@@ -26,12 +26,12 @@ jobs:
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - run: go build
 
-      - name: Install package
+      - name: Install package with new version
         run: |
-          go get -t -u github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
+          go get -t -u github.com/ivona13/go-proj@${{ github.event.client_payload.ref }}
           go mod tidy
       - name: Git commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Commit changes to the repo"
+          commit_message: "Upgrade version of go-proj to ${{ github.event.client_payload.ref }}"
           add_options: "-u go.mod go.sum"
