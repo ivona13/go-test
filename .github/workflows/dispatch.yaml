@@ -5,6 +5,9 @@ on:
 jobs:
   myEvent:
     runs-on: ubuntu-latest
+    env:
+      GOPRIVATE: github.com/ivona13/go-proj
+      GH_ACCESS_TOKEN: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -20,8 +23,9 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.19
+      - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
+      - run: go build
 
       - name: Install package
         run: |
-          go env -w GOPRIVATE=“github.com/ivona13”
           go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
