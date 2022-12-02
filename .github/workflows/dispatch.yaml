@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [update-repo-dependency]
 jobs:
-  myEvent:
+  upgrade-version:
     runs-on: ubuntu-latest
     env:
       GOPRIVATE: github.com/ivona13/go-proj
