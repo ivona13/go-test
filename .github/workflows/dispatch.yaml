@@ -33,14 +33,7 @@ jobs:
           #go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
           go mod tidy
 
-      - name: Git status
-        run: git status
-
-      - name: Git add
-        run: git add .
-
       - name: Git commit
-        run: git commit -m "Update version"
-
-      - name: Git push
-        run: git push origin  master
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Commit changes to the repo"
