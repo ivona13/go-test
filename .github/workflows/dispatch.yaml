@@ -29,3 +29,4 @@ jobs:
       - name: Install package
         run: |
           go get github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
+          go mod tidy
