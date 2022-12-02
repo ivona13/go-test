@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [update-repo-dependency]
 jobs:
-  upgrade-version:
+  myEvent:
     runs-on: ubuntu-latest
     env:
       GOPRIVATE: github.com/ivona13/go-proj
@@ -26,12 +26,11 @@ jobs:
       - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - run: go build
 
-      - name: Install package with the new version
+      - name: Install package
         run: |
-          go get -t -u github.com/ivona13/go-proj@${{ github.event.client_payload.ref }}
+          go get -t -u github.com/ivona13/go-proj@${{ github.event.client_payload.ref  }}
           go mod tidy
-
-      - name: Update go-proj version
+      - name: Git commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update go-proj version to ${{ github.event.client_payload.ref }}"
+          commit_message: "Commit changes to the repo"
